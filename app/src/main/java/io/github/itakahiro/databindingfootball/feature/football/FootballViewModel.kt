@@ -1,4 +1,4 @@
-package io.github.itakahiro.databindingfootball
+package io.github.itakahiro.databindingfootball.feature.football
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

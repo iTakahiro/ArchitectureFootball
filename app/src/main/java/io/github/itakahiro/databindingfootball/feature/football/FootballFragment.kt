@@ -1,4 +1,4 @@
-package io.github.itakahiro.databindingfootball
+package io.github.itakahiro.databindingfootball.feature.football
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,8 @@ class FootballFragment : Fragment() {
 
     private lateinit var binding: FragmentFootballBinding
 
-    private val viewModel = FootballViewModel()
+    private val viewModel =
+        FootballViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
