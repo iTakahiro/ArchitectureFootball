@@ -1,4 +1,4 @@
-package io.github.itakahiro.databindingfootball.feature.football
+package io.github.itakahiro.architecturefootball.feature.football
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import io.github.itakahiro.databindingfootball.databinding.FragmentFootballBinding
+import io.github.itakahiro.architecturefootball.databinding.FragmentFootballBinding
 
 class FootballFragment : Fragment() {
 
