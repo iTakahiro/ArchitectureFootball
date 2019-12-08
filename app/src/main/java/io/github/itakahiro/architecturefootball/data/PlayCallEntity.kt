@@ -1,4 +1,4 @@
-package io.github.itakahiro.databindingfootball.data
+package io.github.itakahiro.architecturefootball.data
 
 import androidx.room.Entity
 
