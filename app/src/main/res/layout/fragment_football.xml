@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="io.github.itakahiro.databindingfootball.feature.football.FootballViewModel" />
+            type="io.github.itakahiro.architecturefootball.feature.football.FootballViewModel" />
     </data>
 
     <LinearLayout

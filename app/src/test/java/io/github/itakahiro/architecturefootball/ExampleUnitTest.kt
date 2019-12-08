@@ -1,4 +1,4 @@
-package io.github.itakahiro.databindingfootball
+package io.github.itakahiro.architecturefootball
 
 import org.junit.Test
 
