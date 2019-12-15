@@ -6,14 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.itakahiro.architecturefootball.databinding.FragmentFootballBinding
+import io.github.itakahiro.architecturefootball.model.PlayCall
 
 class FootballFragment : Fragment() {
 
     private lateinit var binding: FragmentFootballBinding
 
-    private val viewModel =
-        FootballViewModel()
+    private val viewModel = FootballViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,17 +34,27 @@ class FootballFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.editText.addTextChangedListener { text ->
+        binding.editTextInput.addTextChangedListener { text ->
             viewModel.updateButton(text.isNullOrBlank())
         }
-        binding.button.setOnClickListener {
-            val text = binding.editText.text.toString()
+        binding.buttonSet.setOnClickListener {
+            val text = binding.editTextInput.text.toString()
             viewModel.submitText(text)
+            viewModel.savePlayCall(PlayCall(text))
+        }
+        binding.buttonUpdateHistoryList.setOnClickListener {
+            viewModel.loadPlayCallHistoryList()
         }
 
         // この部分はDataBindingで実装
 //        viewModel.isEnabled.observe(viewLifecycleOwner, Observer { isEnabled ->
 //            binding.button.isEnabled = isEnabled
 //        })
+
+        val adapter = PlayCallHistoryListAdapter(this, viewModel)
+        binding.playCallHistoryList.adapter = adapter
+        binding.playCallHistoryList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+        viewModel.loadPlayCallHistoryList()
     }
 }
