@@ -16,11 +16,10 @@ class PlayCallHistoryListAdapter(
 ) : RecyclerView.Adapter<PlayCallHistoryListAdapter.ViewHolder>() {
     init {
         viewModel.playCallHistoryList.observe(fragment, Observer { historyList ->
-            historyList.forEach { playCall ->
-                setItem(playCall)
-            }
+            setItems(historyList)
         })
     }
+
     private val items = mutableListOf<PlayCall>()
 
     override fun getItemCount(): Int {
@@ -41,9 +40,11 @@ class PlayCallHistoryListAdapter(
         val textView = itemView.findViewById<View>(R.id.textViewHistoryItem) as TextView
     }
 
-    private fun setItem(item: PlayCall) {
-        items.clear()
-        items.add(item)
+    private fun setItems(items: List<PlayCall>) {
+        this.items.clear()
+        items.forEach { item ->
+            this.items.add(item)
+        }
         notifyDataSetChanged()
     }
 }
