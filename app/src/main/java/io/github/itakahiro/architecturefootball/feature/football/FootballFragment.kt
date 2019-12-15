@@ -8,6 +8,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.itakahiro.architecturefootball.databinding.FragmentFootballBinding
+import io.github.itakahiro.architecturefootball.model.PlayCall
 
 class FootballFragment : Fragment() {
 
@@ -39,6 +40,10 @@ class FootballFragment : Fragment() {
         binding.buttonSet.setOnClickListener {
             val text = binding.editTextInput.text.toString()
             viewModel.submitText(text)
+            viewModel.savePlayCall(PlayCall(text))
+        }
+        binding.buttonUpdateHistoryList.setOnClickListener {
+            viewModel.loadPlayCallHistoryList()
         }
 
         // この部分はDataBindingで実装
@@ -46,19 +51,10 @@ class FootballFragment : Fragment() {
 //            binding.button.isEnabled = isEnabled
 //        })
 
-        val adapter = HistoryListAdapter()
-        binding.historyList.adapter = adapter
-        binding.historyList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        val adapter = PlayCallHistoryListAdapter(this, viewModel)
+        binding.playCallHistoryList.adapter = adapter
+        binding.playCallHistoryList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        // TODO: DBからHistoryListを取得する
-        //  String -> PlayCall
-        val dummyHistoryList = listOf(
-            "アメフトって面白いですねー",
-            "僕が好きなチームはNY Giants。2014年にDallas Cowboysとの試合でNY GiantsのWR、Odell Beckham Jr.(OBJ)が魅せたワンハンドキャッチでのタッチダウンでOBJとNY Giantsを好きになった。",
-            "エンドゾーン残り1ヤードで、4th Down Gamble!!"
-        )
-        dummyHistoryList.forEach { item ->
-            adapter.setItem(item)
-        }
+        viewModel.loadPlayCallHistoryList()
     }
 }

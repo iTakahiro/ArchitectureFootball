@@ -4,13 +4,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import io.github.itakahiro.architecturefootball.R
+import io.github.itakahiro.architecturefootball.model.PlayCall
 
 
-class HistoryListAdapter() : RecyclerView.Adapter<HistoryListAdapter.ViewHolder>() {
-    // TODO: String -> PlayCall
-    private val items = mutableListOf<String>()
+class PlayCallHistoryListAdapter(
+    fragment: FootballFragment,
+    viewModel: FootballViewModel
+) : RecyclerView.Adapter<PlayCallHistoryListAdapter.ViewHolder>() {
+    init {
+        viewModel.playCallHistoryList.observe(fragment, Observer { historyList ->
+            setItems(historyList)
+        })
+    }
+
+    private val items = mutableListOf<PlayCall>()
 
     override fun getItemCount(): Int {
         return items.size
@@ -23,15 +33,18 @@ class HistoryListAdapter() : RecyclerView.Adapter<HistoryListAdapter.ViewHolder>
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = items[position]
+        holder.textView.text = items[position].description
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView = itemView.findViewById<View>(R.id.textViewHistoryItem) as TextView
     }
 
-    // TODO: String -> PlayCall
-    fun setItem(item: String) {
-        items.add(item)
+    private fun setItems(items: List<PlayCall>) {
+        this.items.clear()
+        items.forEach { item ->
+            this.items.add(item)
+        }
+        notifyDataSetChanged()
     }
 }
