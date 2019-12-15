@@ -39,7 +39,7 @@ class FootballViewModel {
     val playCallHistoryList: LiveData<List<PlayCall>>
         get() = _playCallHistoryList
 
-    fun setHistoryList(historyList: List<PlayCall>){
+    fun setPlayCallHistoryList(historyList: List<PlayCall>) {
         _playCallHistoryList.value = historyList
     }
 
@@ -76,13 +76,13 @@ class AsyncLoad(private val dao: PlayCallDao, private val viewModel: FootballVie
     override fun doInBackground(vararg voids: Void): List<PlayCall>? {
         val playCallMutableList = mutableListOf<PlayCall>()
         dao.loadAllPlayCall().forEach { playCall ->
-            playCallMutableList.add(PlayCall(playCall.description))
+            playCallMutableList.add(PlayCall(description = playCall.description))
         }
         return playCallMutableList
     }
 
     override fun onPostExecute(listOfPlayCalls: List<PlayCall>) {
-        viewModel.setHistoryList(listOfPlayCalls)
+        viewModel.setPlayCallHistoryList(listOfPlayCalls)
     }
 }
 
@@ -91,7 +91,7 @@ class AsyncSave(private val dao: PlayCallDao) : AsyncTask<PlayCall, PlayCall, Vo
     override fun onPreExecute() {}
 
     override fun doInBackground(vararg playCall: PlayCall): Void? {
-        dao.savePlayCall(playCallEntity = PlayCallEntity(description = playCall.first().description))
+        dao.savePlayCall(PlayCallEntity(description = playCall.first().description))
         return null
     }
 
