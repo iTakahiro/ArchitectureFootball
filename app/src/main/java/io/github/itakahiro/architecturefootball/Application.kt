@@ -2,11 +2,11 @@ package io.github.itakahiro.architecturefootball
 
 import android.app.Application
 import androidx.room.Room
-import io.github.itakahiro.architecturefootball.data.db.PlayCallDatabase
+import io.github.itakahiro.architecturefootball.data.db.AppDatabase
 
 class Application : Application() {
     companion object {
-        lateinit var playCallDatabase: PlayCallDatabase
+        lateinit var playCallDatabase: AppDatabase
     }
 
     override fun onCreate() {
@@ -14,7 +14,7 @@ class Application : Application() {
 
         playCallDatabase = Room.databaseBuilder(
             applicationContext,
-            PlayCallDatabase::class.java,
+            AppDatabase::class.java,
             "play_call_database"
         ).build()
     }
