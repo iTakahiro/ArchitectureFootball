@@ -42,9 +42,6 @@ class FootballFragment : Fragment() {
             viewModel.submitText(text)
             viewModel.savePlayCall(PlayCall(text))
         }
-        binding.buttonUpdateHistoryList.setOnClickListener {
-            viewModel.loadPlayCallHistoryList()
-        }
 
         // この部分はDataBindingで実装
 //        viewModel.isEnabled.observe(viewLifecycleOwner, Observer { isEnabled ->
