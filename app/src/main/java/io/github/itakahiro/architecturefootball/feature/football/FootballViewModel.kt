@@ -63,7 +63,7 @@ class FootballViewModel {
     }
 
     fun savePlayCall(playCall: PlayCall) {
-        val asyncSave = AsyncSave(dao)
+        val asyncSave = AsyncSave(dao, this)
         asyncSave.execute(playCall)
     }
 }
@@ -86,7 +86,7 @@ class AsyncLoad(private val dao: PlayCallDao, private val viewModel: FootballVie
     }
 }
 
-class AsyncSave(private val dao: PlayCallDao) : AsyncTask<PlayCall, PlayCall, Void>() {
+class AsyncSave(private val dao: PlayCallDao, private val viewModel: FootballViewModel) : AsyncTask<PlayCall, PlayCall, Void>() {
 
     override fun onPreExecute() {}
 
@@ -95,5 +95,8 @@ class AsyncSave(private val dao: PlayCallDao) : AsyncTask<PlayCall, PlayCall, Vo
         return null
     }
 
-    override fun onPostExecute(result: Void?) {}
+    override fun onPostExecute(result: Void?) {
+        val asyncLoad = AsyncLoad(dao, viewModel)
+        asyncLoad.execute()
+    }
 }
