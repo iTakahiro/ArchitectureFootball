@@ -15,7 +15,7 @@ class Application : Application() {
         database = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java,
-            "database"
+            "app_database"
         ).build()
     }
 }
