@@ -9,7 +9,7 @@ import io.github.itakahiro.architecturefootball.data.db.PlayCallDao
 import io.github.itakahiro.architecturefootball.model.PlayCall
 
 class FootballViewModel {
-    private val dao = Application.playCallDatabase.playCallDao()
+    private val dao = Application.database.playCallDao()
 
     private val _submittedText =
         MutableLiveData<String>().also { mutableLiveData ->

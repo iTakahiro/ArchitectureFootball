@@ -6,16 +6,16 @@ import io.github.itakahiro.architecturefootball.data.db.AppDatabase
 
 class Application : Application() {
     companion object {
-        lateinit var playCallDatabase: AppDatabase
+        lateinit var database: AppDatabase
     }
 
     override fun onCreate() {
         super.onCreate()
 
-        playCallDatabase = Room.databaseBuilder(
+        database = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java,
-            "play_call_database"
+            "app_database"
         ).build()
     }
 }
