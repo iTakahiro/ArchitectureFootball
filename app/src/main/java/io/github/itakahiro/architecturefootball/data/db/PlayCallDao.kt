@@ -8,7 +8,7 @@ import io.github.itakahiro.architecturefootball.data.PlayCallEntity
 
 @Dao
 interface PlayCallDao {
-    @Query("SELECT * FROM play_call")
+    @Query("SELECT * FROM play_calls")
     fun loadAllPlayCall(): List<PlayCallEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
