@@ -8,4 +8,5 @@ Googleで提供されている標準ライブラリの使用方法を実装し�
 |-|-|-|
 |DataBinding|databinding|実装済み|
 |Room|room|実装済み|
+|Coroutines|coroutines|実装済み|
 |Dagger2|dagger2(予定)|未実装|
