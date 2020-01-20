@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.runBlocking
 
 class FootballViewModel {
     private val dao = Application.database.playCallDao()
@@ -73,32 +73,60 @@ class FootballViewModel {
      */
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    fun loadPlayCallHistoryList() {
-        // AsyncTaskを用いた場合
-//        val asyncLoad = AsyncLoad(dao, this)
-//        asyncLoad.execute()
+    fun loadPlayCallHistoryList() = runBlocking {
         val playCallMutableList = mutableListOf<PlayCall>()
         uiScope.launch {
-            withContext(Dispatchers.Default) {
-                dao.loadAllPlayCall().forEach { playCall ->
-                    playCallMutableList.add(PlayCall(description = playCall.description))
-                }
+            dao.loadAllPlayCall().forEach { playCall ->
+                playCallMutableList.add(PlayCall(description = playCall.description))
             }
-            setPlayCallHistoryList(playCallMutableList)
         }
+        setPlayCallHistoryList(playCallMutableList)
     }
 
-    fun savePlayCall(playCall: PlayCall) {
-        // AsyncTaskを用いた場合
+    // runBlockingを使わない場合. withContextで別スレッドを立ち上げる.
+    // withContext内の処理実行時は同じCoroutine(ここではuiScope.launch)内の処理を停止してくれる
+//    fun loadPlayCallHistoryList() {
+//        val playCallMutableList = mutableListOf<PlayCall>()
+//        uiScope.launch {
+//            withContext(Dispatchers.Default) {
+//                dao.loadAllPlayCall().forEach { playCall ->
+//                    playCallMutableList.add(PlayCall(description = playCall.description))
+//                }
+//            }
+//            setPlayCallHistoryList(playCallMutableList)
+//        }
+//    }
+
+    // AsyncTaskを用いた場合
+//    fun loadPlayCallHistoryList() {
+//        val asyncLoad = AsyncLoad(dao, this)
+//        asyncLoad.execute()
+//    }
+
+    
+    fun savePlayCall(playcall: PlayCall) = runBlocking {
+        uiScope.launch {
+            dao.savePlayCall(PlayCallEntity(description = playcall.description))
+        }
+        loadPlayCallHistoryList()
+    }
+
+    // runBlockingを使わない場合. withContextで別スレッドを立ち上げる.
+    // withContext内の処理実行時は同じCoroutine(ここではuiScope.launch)内の処理を停止してくれる
+//    fun savePlayCall(playCall: PlayCall) {
+//        uiScope.launch {
+//            withContext(Dispatchers.Default) {
+//                dao.savePlayCall(PlayCallEntity(description = playCall.description))
+//            }
+//            loadPlayCallHistoryList()
+//        }
+//    }
+
+    // AsyncTaskを用いた場合
+//    fun savePlayCall(playCall: PlayCall) {
 //        val asyncSave = AsyncSave(dao, this)
 //        asyncSave.execute(playCall)
-        uiScope.launch {
-            withContext(Dispatchers.Default) {
-                dao.savePlayCall(PlayCallEntity(description = playCall.description))
-            }
-            loadPlayCallHistoryList()
-        }
-    }
+//    }
 }
 
 // AsyncTaskを用いた場合
