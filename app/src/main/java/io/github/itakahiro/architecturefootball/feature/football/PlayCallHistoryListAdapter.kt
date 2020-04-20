@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.itakahiro.architecturefootball.R
 import io.github.itakahiro.architecturefootball.model.PlayCall
 
-
 class PlayCallHistoryListAdapter(
     fragment: Fragment,
     viewModel: FootballViewModel
