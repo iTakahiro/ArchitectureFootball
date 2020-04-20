@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import io.github.itakahiro.architecturefootball.R
 import io.github.itakahiro.architecturefootball.model.PlayCall
 
-
 class PlayCallHistoryListAdapter(
-    fragment: FootballFragment,
+    fragment: Fragment,
     viewModel: FootballViewModel
 ) : RecyclerView.Adapter<PlayCallHistoryListAdapter.ViewHolder>() {
     init {
@@ -29,7 +29,9 @@ class PlayCallHistoryListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater =
             LayoutInflater.from(parent.context).inflate(R.layout.item_hitory_list, parent, false)
-        return ViewHolder(inflater)
+        return ViewHolder(
+            inflater
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

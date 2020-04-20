@@ -91,5 +91,16 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="32dp" />
 
+        <Button
+            android:id="@+id/buttonOpenList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="一覧を表示"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewHistoryList"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+            app:layout_constraintTop_toBottomOf="@+id/buttonSet"
+            app:layout_constraintVertical_bias="1.0" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
