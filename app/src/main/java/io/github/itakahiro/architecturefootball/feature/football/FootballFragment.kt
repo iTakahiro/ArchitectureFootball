@@ -67,11 +67,7 @@ class FootballFragment : Fragment() {
 //            binding.button.isEnabled = isEnabled
 //        })
 
-        val adapter =
-            PlayCallHistoryListAdapter(
-                this,
-                viewModel
-            )
+        val adapter = PlayCallHistoryListAdapter(this, viewModel)
         binding.playCallHistoryList.adapter = adapter
         binding.playCallHistoryList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 

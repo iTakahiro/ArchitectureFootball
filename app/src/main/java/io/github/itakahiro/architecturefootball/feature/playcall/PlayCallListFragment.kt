@@ -26,11 +26,7 @@ class PlayCallListFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter =
-            PlayCallHistoryListAdapter(
-                this,
-                viewModel
-            )
+        val adapter = PlayCallHistoryListAdapter(this, viewModel)
         playCallList.adapter = adapter
         playCallList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
