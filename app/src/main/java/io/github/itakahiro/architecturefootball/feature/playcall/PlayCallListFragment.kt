@@ -1,4 +1,4 @@
-package io.github.itakahiro.architecturefootball.feature.football
+package io.github.itakahiro.architecturefootball.feature.playcall
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,8 @@ import io.github.itakahiro.architecturefootball.R
 
 class PlayCallListFragment: Fragment() {
 
-    val viewModel = PlayCallListViewModel()
+    val viewModel =
+        PlayCallListViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,

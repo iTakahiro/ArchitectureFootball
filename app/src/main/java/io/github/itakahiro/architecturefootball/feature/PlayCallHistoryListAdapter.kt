@@ -1,4 +1,4 @@
-package io.github.itakahiro.architecturefootball.feature.football
+package io.github.itakahiro.architecturefootball.feature
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import io.github.itakahiro.architecturefootball.R
+import io.github.itakahiro.architecturefootball.feature.football.FootballFragment
+import io.github.itakahiro.architecturefootball.feature.football.FootballViewModel
 import io.github.itakahiro.architecturefootball.model.PlayCall
 
 
@@ -29,7 +31,9 @@ class PlayCallHistoryListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater =
             LayoutInflater.from(parent.context).inflate(R.layout.item_hitory_list, parent, false)
-        return ViewHolder(inflater)
+        return ViewHolder(
+            inflater
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
