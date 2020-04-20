@@ -1,4 +1,4 @@
-package io.github.itakahiro.architecturefootball.feature
+package io.github.itakahiro.architecturefootball.feature.football
 
 import android.view.LayoutInflater
 import android.view.View
