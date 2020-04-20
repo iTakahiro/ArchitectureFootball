@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.itakahiro.architecturefootball.MainActivity
 import io.github.itakahiro.architecturefootball.databinding.FragmentFootballBinding
-import io.github.itakahiro.architecturefootball.feature.PlayCallHistoryListAdapter
 import io.github.itakahiro.architecturefootball.feature.playcall.PlayCallListFragment
 import io.github.itakahiro.architecturefootball.model.PlayCall
 
@@ -68,10 +67,11 @@ class FootballFragment : Fragment() {
 //            binding.button.isEnabled = isEnabled
 //        })
 
-        val adapter = PlayCallHistoryListAdapter(
-            this,
-            viewModel
-        )
+        val adapter =
+            PlayCallHistoryListAdapter(
+                this,
+                viewModel
+            )
         binding.playCallHistoryList.adapter = adapter
         binding.playCallHistoryList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 

@@ -4,16 +4,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import io.github.itakahiro.architecturefootball.R
-import io.github.itakahiro.architecturefootball.feature.football.FootballFragment
-import io.github.itakahiro.architecturefootball.feature.football.FootballViewModel
 import io.github.itakahiro.architecturefootball.model.PlayCall
 
 
 class PlayCallHistoryListAdapter(
-    fragment: FootballFragment,
+    fragment: Fragment,
     viewModel: FootballViewModel
 ) : RecyclerView.Adapter<PlayCallHistoryListAdapter.ViewHolder>() {
     init {
