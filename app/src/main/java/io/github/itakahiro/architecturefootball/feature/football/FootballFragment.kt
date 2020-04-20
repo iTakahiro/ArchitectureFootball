@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import io.github.itakahiro.architecturefootball.MainActivity
 import io.github.itakahiro.architecturefootball.databinding.FragmentFootballBinding
 import io.github.itakahiro.architecturefootball.model.PlayCall
 
@@ -52,6 +53,11 @@ class FootballFragment : Fragment() {
             val text = binding.editTextInput.text.toString()
             viewModel.submitText(text)
             viewModel.savePlayCall(PlayCall(text))
+        }
+        binding.buttonOpenList.setOnClickListener {
+            val playCallListFragment = PlayCallListFragment()
+            val mainActivity = activity as MainActivity?
+            mainActivity?.replaceFragment(playCallListFragment)
         }
 
         // この部分はDataBindingで実装
