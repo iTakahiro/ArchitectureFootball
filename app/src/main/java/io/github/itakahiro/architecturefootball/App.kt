@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import io.github.itakahiro.architecturefootball.data.db.AppDatabase
 
-class Application : Application() {
+class App : Application() {
     companion object {
         lateinit var database: AppDatabase
     }
