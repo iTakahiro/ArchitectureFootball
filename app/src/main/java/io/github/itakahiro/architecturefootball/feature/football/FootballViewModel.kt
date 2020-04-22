@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import io.github.itakahiro.architecturefootball.Application
 import io.github.itakahiro.architecturefootball.data.PlayCallEntity
 import io.github.itakahiro.architecturefootball.model.PlayCall
+import io.github.itakahiro.architecturefootball.repository.PlayCallRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -12,7 +13,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class FootballViewModel {
+    // TODO: repositoryをDIしてdaoの生成処理を削除する
     private val dao = Application.database.playCallDao()
+    private val repository = PlayCallRepository(dao)
 
     private val _submittedText =
         MutableLiveData<String>().also { mutableLiveData ->
@@ -80,7 +83,7 @@ class FootballViewModel {
         val playCallMutableList = mutableListOf<PlayCall>()
         uiScope.launch {
             withContext(Dispatchers.Default) {
-                dao.loadAllPlayCall().forEach { playCall ->
+                repository.loadAllPlayCall().forEach { playCall ->
                     playCallMutableList.add(PlayCall(description = playCall.description))
                 }
             }
@@ -94,7 +97,7 @@ class FootballViewModel {
 //        asyncSave.execute(playCall)
         uiScope.launch {
             withContext(Dispatchers.Default) {
-                dao.savePlayCall(PlayCallEntity(description = playCall.description))
+                repository.savePlayCall(PlayCallEntity(description = playCall.description))
             }
             loadPlayCallHistoryList()
         }
