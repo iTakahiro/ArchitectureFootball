@@ -2,8 +2,8 @@ package io.github.itakahiro.architecturefootball.feature.football
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import io.github.itakahiro.architecturefootball.App
 import io.github.itakahiro.architecturefootball.data.PlayCallEntity
+import io.github.itakahiro.architecturefootball.feature.common.PlayCallHistoryListViewModel
 import io.github.itakahiro.architecturefootball.model.PlayCall
 import io.github.itakahiro.architecturefootball.repository.PlayCallRepository
 import kotlinx.coroutines.CoroutineScope
@@ -12,10 +12,12 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class FootballViewModel {
-    // TODO: repositoryをDIしてdaoの生成処理を削除する
-    private val dao = App.database.playCallDao()
-    private val repository = PlayCallRepository(dao)
+class FootballViewModel(
+    private val repository: PlayCallRepository
+) : PlayCallHistoryListViewModel() {
+    // DIする(= プライマリコンストラクタに移動)
+//    private val dao = App.database.playCallDao()
+//    private val repository = PlayCallRepository(dao)
 
     private val _submittedText =
         MutableLiveData<String>().also { mutableLiveData ->
@@ -38,17 +40,6 @@ class FootballViewModel {
     val buttonText: LiveData<String>
         get() = _buttonText
 
-    private val _playCallHistoryList: MutableLiveData<List<PlayCall>> =
-        MutableLiveData<List<PlayCall>>().also { mutableLiveData ->
-            mutableLiveData.value = emptyList()
-        }
-    val playCallHistoryList: LiveData<List<PlayCall>>
-        get() = _playCallHistoryList
-
-    private fun setPlayCallHistoryList(historyList: List<PlayCall>) {
-        _playCallHistoryList.value = historyList
-    }
-
     fun updateButton(isBlank: Boolean) {
         _isEnabled.value = !isBlank
 
@@ -63,6 +54,7 @@ class FootballViewModel {
         _submittedText.value = text
     }
 
+    // TODO: viewModelJobいらんかも? このクラスはViewModel()を継承してないから
     /**
      * This is the job for all coroutines started by this ViewModel.
      * Cancelling this job will cancel all coroutines started by this ViewModel.
