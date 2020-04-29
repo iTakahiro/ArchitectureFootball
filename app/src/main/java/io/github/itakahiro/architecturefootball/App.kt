@@ -5,8 +5,7 @@ import androidx.room.Room
 import io.github.itakahiro.architecturefootball.data.db.AppDatabase
 import io.github.itakahiro.architecturefootball.di.AppComponent
 import io.github.itakahiro.architecturefootball.di.DaggerAppComponent
-import io.github.itakahiro.architecturefootball.di.ViewModelModule
-import io.github.itakahiro.architecturefootball.repository.PlayCallRepository
+import io.github.itakahiro.architecturefootball.di.DatabaseModule
 
 class App : Application() {
     companion object {
@@ -24,7 +23,7 @@ class App : Application() {
         ).build()
 
         appComponent = DaggerAppComponent.builder()
-            .viewModelModule(ViewModelModule(PlayCallRepository(database.playCallDao())))
+            .databaseModule(DatabaseModule())
             .build()
     }
 }

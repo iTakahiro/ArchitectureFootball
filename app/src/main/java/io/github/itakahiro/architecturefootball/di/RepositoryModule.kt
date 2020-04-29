@@ -6,13 +6,14 @@ import io.github.itakahiro.architecturefootball.data.db.PlayCallDao
 import io.github.itakahiro.architecturefootball.repository.PlayCallRepository
 import javax.inject.Inject
 
-@Module
-class RepositoryModule @Inject constructor(
-    private val dao: PlayCallDao
-) {
-    // Repository
+@Module(
+    includes = [DatabaseModule::class]
+)
+class RepositoryModule {
+
     @Provides
-    fun providePlayCallRepository(): PlayCallRepository {
+    @Inject
+    fun providePlayCallRepository(dao: PlayCallDao): PlayCallRepository {
         return PlayCallRepository(dao)
     }
 }

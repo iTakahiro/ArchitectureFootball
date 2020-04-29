@@ -18,15 +18,4 @@ class AppModule {
 //    fun providePlayCallRepository(dao: PlayCallDao): PlayCallRepository {
 //        return PlayCallRepository(dao)
 //    }
-//
-//    // ViewModel
-//    @Provides
-//    fun provideFootballViewModel(repository: PlayCallRepository): FootballViewModel {
-//        return FootballViewModel(repository)
-//    }
-//
-//    @Provides
-//    fun providePlayCallListViewModel(repository: PlayCallRepository): PlayCallListViewModel {
-//        return PlayCallListViewModel(repository)
-//    }
 }
