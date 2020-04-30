@@ -11,4 +11,4 @@
 |DataBinding|databinding|実装済み|
 |Room|room|実装済み|
 |Coroutines|coroutines|実装済み|
-|Dagger2|dagger2(予定)|未実装|
+|Dagger2|dagger2|基本機能は実装済み|
