@@ -1,8 +1,5 @@
-package io.github.itakahiro.architecturefootball.feature.football
+package io.github.itakahiro.architecturefootball.feature.playcalllist
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import io.github.itakahiro.architecturefootball.data.PlayCallEntity
 import io.github.itakahiro.architecturefootball.feature.common.PlayCallHistoryListViewModel
 import io.github.itakahiro.architecturefootball.model.PlayCall
 import io.github.itakahiro.architecturefootball.repository.PlayCallRepository
@@ -12,48 +9,9 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class FootballViewModel(
+class PlayCallListViewModel(
     private val repository: PlayCallRepository
 ) : PlayCallHistoryListViewModel() {
-    // DIする(= プライマリコンストラクタに移動)
-//    private val dao = App.database.playCallDao()
-//    private val repository = PlayCallRepository(dao)
-
-    private val _submittedText =
-        MutableLiveData<String>().also { mutableLiveData ->
-            mutableLiveData.value = "ここに、出力されます"
-        }
-    val submittedText: LiveData<String>
-        get() = _submittedText
-
-    private val _isEnabled: MutableLiveData<Boolean> =
-        MutableLiveData<Boolean>().also { mutableLiveData ->
-            mutableLiveData.value = false
-        }
-    val isEnabled: LiveData<Boolean>
-        get() = _isEnabled
-
-    private val _buttonText: MutableLiveData<String> =
-        MutableLiveData<String>().also { mutableLiveData ->
-            mutableLiveData.value = "Ready"
-        }
-    val buttonText: LiveData<String>
-        get() = _buttonText
-
-    fun updateButton(isBlank: Boolean) {
-        _isEnabled.value = !isBlank
-
-        if (!isBlank) {
-            _buttonText.value = "Set!!!"
-        } else {
-            _buttonText.value = "Ready"
-        }
-    }
-
-    fun submitText(text: String) {
-        _submittedText.value = text
-    }
-
     // TODO: viewModelJobいらんかも? このクラスはViewModel()を継承してないから
     /**
      * This is the job for all coroutines started by this ViewModel.
@@ -82,18 +40,6 @@ class FootballViewModel(
             setPlayCallHistoryList(playCallMutableList)
         }
     }
-
-    fun savePlayCall(playCall: PlayCall) {
-        // AsyncTaskを用いた場合
-//        val asyncSave = AsyncSave(dao, this)
-//        asyncSave.execute(playCall)
-        uiScope.launch {
-            withContext(Dispatchers.Default) {
-                repository.savePlayCall(PlayCallEntity(description = playCall.description))
-            }
-            loadPlayCallHistoryList()
-        }
-    }
 }
 
 // AsyncTaskを用いた場合
@@ -111,20 +57,5 @@ class FootballViewModel(
 //
 //    override fun onPostExecute(listOfPlayCalls: List<PlayCall>) {
 //        viewModel.setPlayCallHistoryList(listOfPlayCalls)
-//    }
-//}
-//
-//class AsyncSave(private val dao: PlayCallDao, private val viewModel: FootballViewModel) : AsyncTask<PlayCall, PlayCall, Void>() {
-//
-//    override fun onPreExecute() {}
-//
-//    override fun doInBackground(vararg playCall: PlayCall): Void? {
-//        dao.savePlayCall(PlayCallEntity(description = playCall.first().description))
-//        return null
-//    }
-//
-//    override fun onPostExecute(result: Void?) {
-//        val asyncLoad = AsyncLoad(dao, viewModel)
-//        asyncLoad.execute()
 //    }
 //}

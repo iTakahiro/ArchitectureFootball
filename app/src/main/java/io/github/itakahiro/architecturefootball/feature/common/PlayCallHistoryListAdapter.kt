@@ -1,4 +1,4 @@
-package io.github.itakahiro.architecturefootball.feature.football
+package io.github.itakahiro.architecturefootball.feature.common
 
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +12,7 @@ import io.github.itakahiro.architecturefootball.model.PlayCall
 
 class PlayCallHistoryListAdapter(
     fragment: Fragment,
-    viewModel: FootballViewModel
+    viewModel: PlayCallHistoryListViewModel
 ) : RecyclerView.Adapter<PlayCallHistoryListAdapter.ViewHolder>() {
     init {
         viewModel.playCallHistoryList.observe(fragment, Observer { historyList ->

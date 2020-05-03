@@ -10,16 +10,30 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.github.itakahiro.architecturefootball.MainActivity
 import io.github.itakahiro.architecturefootball.databinding.FragmentFootballBinding
-import io.github.itakahiro.architecturefootball.feature.playcall.PlayCallListFragment
+import io.github.itakahiro.architecturefootball.feature.MainActivity
+import io.github.itakahiro.architecturefootball.feature.common.PlayCallHistoryListAdapter
+import io.github.itakahiro.architecturefootball.feature.football.di.inject
+import io.github.itakahiro.architecturefootball.feature.playcalllist.PlayCallListFragment
 import io.github.itakahiro.architecturefootball.model.PlayCall
+import javax.inject.Inject
 
 class FootballFragment : Fragment() {
 
     private lateinit var binding: FragmentFootballBinding
 
-    private val viewModel = FootballViewModel()
+    // DIすることで、以下3行を消せる. つまりこれらのクラスに対する依存性を軽減できる.
+//    private val dao = App.database.playCallDao()
+//    private val repository = PlayCallRepository(dao)
+//    private val viewModel = FootballViewModel(repository)
+    @Inject
+    lateinit var viewModel: FootballViewModel
+
+    override fun onAttach(context: Context) {
+//        App.appComponent.inject(this)
+        this.inject()
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,11 +81,7 @@ class FootballFragment : Fragment() {
 //            binding.button.isEnabled = isEnabled
 //        })
 
-        val adapter =
-            PlayCallHistoryListAdapter(
-                this,
-                viewModel
-            )
+        val adapter = PlayCallHistoryListAdapter(this, viewModel)
         binding.playCallHistoryList.adapter = adapter
         binding.playCallHistoryList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 

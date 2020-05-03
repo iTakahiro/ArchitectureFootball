@@ -1,8 +1,9 @@
-package io.github.itakahiro.architecturefootball
+package io.github.itakahiro.architecturefootball.feature
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import io.github.itakahiro.architecturefootball.R
 import io.github.itakahiro.architecturefootball.feature.football.FootballFragment
 import io.github.itakahiro.architecturefootball.util.Transition
 
