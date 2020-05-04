@@ -3,7 +3,7 @@
 
 `Football`は`American Football`の`Football`で、特に意味はなし。
 
-アーキテクチャー(MVVM)を学習するためのプロジェクトで、Googleで提供されている標準ライブラリを使用し実装してみる
+MVVMでアプリを構築する際に必要なライブラリを一通り使用し実装してみる。
 
 ## 実装するライブラリとブランチの対応
 |ライブラリ名|ブランチ名|実装の状況|
@@ -12,3 +12,4 @@
 |Room|room|実装済み|
 |Coroutines|coroutines|実装済み|
 |Dagger2|dagger2|基本機能は実装済み|
+|Spek2|spek2|
